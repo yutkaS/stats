@@ -129,8 +129,8 @@ const update = (update) => {
     console.log(chatId, chat);
     if (chatId !== chat) return
 
-    const fromId = message?.from?.id;
-    const fromName = message?.from['first_name'];
+    const fromId = message.from.id;
+    const fromName = message.from['first_name'];
 
 
     if (getUserIndex(fromId) === null) addUser(fromId, fromName);
