@@ -152,5 +152,6 @@ const handleInterval = async () => {
 
 fs.writeFileSync(file, `[{"trashTalkActive": "false"}]`, 'utf8');
 
+handleInterval();
 setInterval(handleInterval, 1000 * 60 * 5);
 
