@@ -167,7 +167,6 @@ const handleInterval = async () => {
 };
 
 fs.writeFileSync(file, `[{"trashTalkActive": "false", "hasTrashTalkToday": "false", "isProd": "${isProd}"}]`, 'utf8');
-setTimeout(handleDayEnd, 10000)
 handleInterval();
 setInterval(handleInterval, timeToInterval);
 
