@@ -142,5 +142,5 @@ const handleInterval = async () => {
 
 fs.writeFileSync("stats.json", `[{"trashTalkActive": "false"}]`, 'utf8');
 
-setInterval(handleInterval, 10000);
+setInterval(handleInterval, 60000 * 20);
 
