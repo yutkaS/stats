@@ -92,8 +92,7 @@ const checkTrashTalk = (updates) => {
 
 // обработчик каждого сообщения
 const readMessage = (message) => {
-
-    const readerId = message?.from?.id;
+    const readerId = message.from.id;
     const replyBy = message['reply_to_message'];
     const forwardDate = message['forward_date'];
     const photo = message.photo;
