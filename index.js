@@ -3,11 +3,17 @@ import fs from 'fs';
 
 // константы
 const myToken = '5565355473:AAHyGBFLqGzUFulnx558GYiyzZ6LN_XTbk0';
-const chatIdTest = '-1001565652407';
+const chatIdTest = -787142727;
+const bottleChatId = -1001537695968;
+const statisticChatId = -643353109;
 const messageToTrashTalk = 20;
 const timeToTrashTalk = 60 * 5;
 
-const sendMessage = async (text) => fetch(`https://api.telegram.org/bot${myToken}/sendMessage?chat_id=${chatIdTest}&text=${text}`);
+const isProd = true;
+const file = isProd ? "stats.json" : "test.json"
+const chat = isProd ? bottleChatId : chatIdTest;
+
+const sendMessage = async (text) => fetch(`https://api.telegram.org/bot${myToken}/sendMessage?chat_id=${statisticChatId}&text=${text}`);
 
 const getUpdates = async () => fetch(`https://api.telegram.org/bot${myToken}/getUpdates?offset=-100`)
     .then((e) => e.json())
@@ -18,7 +24,7 @@ let lastReaded = 0;
 
 // получить индекс юзера в главном массиве
 const getUserIndex = (id) => {
-    const statsJson = fs.readFileSync('./stats.json', 'utf8');
+    const statsJson = fs.readFileSync(file, 'utf8');
     const stats = JSON.parse(statsJson);
     let index = null;
 
@@ -31,7 +37,7 @@ const getUserIndex = (id) => {
 
 //добавить юзера
 const addUser = (id, name) => {
-    const statsJson = fs.readFileSync('./stats.json', 'utf8');
+    const statsJson = fs.readFileSync(file, 'utf8');
     const stats = JSON.parse(statsJson);
 
     const newUser = {
@@ -48,27 +54,27 @@ const addUser = (id, name) => {
     };
 
     stats.push(newUser);
-    fs.writeFileSync('./stats.json', JSON.stringify(stats), 'utf8');
+    fs.writeFileSync(file, JSON.stringify(stats), 'utf8');
 };
 
 //закончить трешток
 const stopTrashTalk = () => {
-    const statsJson = fs.readFileSync('./stats.json', 'utf8');
+    const statsJson = fs.readFileSync(file, 'utf8');
     const stats = JSON.parse(statsJson);
 
     stats[0].trashTalkActive = false;
 
-    fs.writeFileSync('./stats.json', JSON.stringify(stats), 'utf8');
+    fs.writeFileSync(file, JSON.stringify(stats), 'utf8');
 }
 
 //начать трешток
 const startTrashTalk = () => {
-    const statsJson = fs.readFileSync('./stats.json', 'utf8');
+    const statsJson = fs.readFileSync(file, 'utf8');
     const stats = JSON.parse(statsJson);
 
     stats[0].trashTalkActive = true;
 
-    fs.writeFileSync('./stats.json', JSON.stringify(stats), 'utf8');
+    fs.writeFileSync(file, JSON.stringify(stats), 'utf8');
 }
 
 
@@ -87,7 +93,7 @@ const checkTrashTalk = (updates) => {
 // обработчик каждого сообщения
 const readMessage = (message) => {
 
-    const readerId = message.from.id;
+    const readerId = message?.from?.id;
     const replyBy = message['reply_to_message'];
     const forwardDate = message['forward_date'];
     const photo = message.photo;
@@ -97,7 +103,7 @@ const readMessage = (message) => {
     const text = message.text;
     const caption = message.caption;
 
-    const statsJson = fs.readFileSync('./stats.json', 'utf8');
+    const statsJson = fs.readFileSync(file, 'utf8');
     const stats = JSON.parse(statsJson);
 
     const user = stats[getUserIndex(readerId)];
@@ -111,19 +117,21 @@ const readMessage = (message) => {
     if (photo) user.photosCount += 1;
     if (replyBy) user.repliesCount += 1;
 
-    fs.writeFileSync('./stats.json', JSON.stringify(stats), 'utf8');
+    fs.writeFileSync(file, JSON.stringify(stats), 'utf8');
 };
 
 // обработчик каждого апдейта
 const update = (update) => {
     const message = update.message;
-    const fromId = message.from.id;
-    const fromName = message.from['first_name'];
+    const chatId = message?.chat?.id;
+    if (chatId !== chat) return
 
-    if (message['message_id'] <= lastReaded) return;
+    const fromId = message?.from?.id;
+    const fromName = message?.from['first_name'];
+
+    if (!message || message['message_id'] <= lastReaded) return;
 
     if (getUserIndex(fromId) === null) addUser(fromId, fromName);
-    console.log(message);
     readMessage(message);
 
     lastReaded = message['message_id'];
@@ -131,16 +139,16 @@ const update = (update) => {
 
 // интервал
 const handleInterval = async () => {
-    const statsJson = fs.readFileSync('./stats.json', 'utf8');
 
     const updates = await getUpdates();
-    checkTrashTalk(updates);
-    updates.map(update);
+    await checkTrashTalk(updates);
+    await updates.map(update);
 
+    const statsJson = fs.readFileSync(file, 'utf8');
     await sendMessage(statsJson);
 };
 
-fs.writeFileSync("stats.json", `[{"trashTalkActive": "false"}]`, 'utf8');
+fs.writeFileSync(file, `[{"trashTalkActive": "false"}]`, 'utf8');
 
-setInterval(handleInterval, 60000 * 20);
+setInterval(handleInterval, 1000 * 60 * 5);
 
