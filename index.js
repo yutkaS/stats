@@ -84,7 +84,7 @@ const checkTrashTalk = (updates) => {
 
     if (messageToTrashTalk > updatesCount) return;
     if (
-        (updates[updatesCount - 1].message.date - updates[updatesCount - messageToTrashTalk].message.date) < timeToTrashTalk &&
+        (updates[updatesCount - 1]?.message?.date - updates[updatesCount - messageToTrashTalk]?.message?.date) < timeToTrashTalk &&
         Date.now() / 1000 - updates[updatesCount - 1].message.date < 60
     ) startTrashTalk();
     else stopTrashTalk()
@@ -124,6 +124,7 @@ const readMessage = (message) => {
 const update = (update) => {
     const message = update.message;
     const chatId = message?.chat?.id;
+    console.log(chatId, chat);
     if (chatId !== chat) return
 
     const fromId = message?.from?.id;
