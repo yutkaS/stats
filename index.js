@@ -82,9 +82,9 @@ const startTrashTalk = () => {
 const checkTrashTalk = (updates) => {
     const updatesCount = updates.length;
 
-    if (messageToTrashTalk > updatesCount) return;
+    if (messageToTrashTalk > updatesCount || !updates[updatesCount - 1].message || updates[updatesCount - messageToTrashTalk]?.message) return;
     if (
-        (updates[updatesCount - 1]?.message?.date - updates[updatesCount - messageToTrashTalk]?.message?.date) < timeToTrashTalk &&
+        (updates[updatesCount - 1].message?.date - updates[updatesCount - messageToTrashTalk]?.message?.date) < timeToTrashTalk &&
         Date.now() / 1000 - updates[updatesCount - 1].message.date < 60
     ) startTrashTalk();
     else stopTrashTalk()
