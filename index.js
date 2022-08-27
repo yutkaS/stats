@@ -126,7 +126,7 @@ const update = (update) => {
     if (!message || message['message_id'] <= lastReaded) return;
 
     const chatId = message.chat.id;
-    console.log(chatId, chat);
+    console.log(message, "прочитанное сообщение");
     if (chatId !== chat) return
 
     const fromId = message.from.id;
