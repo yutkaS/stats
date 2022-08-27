@@ -82,7 +82,7 @@ const startTrashTalk = () => {
 const checkTrashTalk = (updates) => {
     const updatesCount = updates.length;
 
-    if (messageToTrashTalk > updatesCount || !updates[updatesCount - 1].message || updates[updatesCount - messageToTrashTalk].message) return;
+    if (messageToTrashTalk > updatesCount || !updates[updatesCount - 1].message || !updates[updatesCount - messageToTrashTalk].message) return;
     if (
         (updates[updatesCount - 1].message.date - updates[updatesCount - messageToTrashTalk].message.date) < timeToTrashTalk &&
         Date.now() / 1000 - updates[updatesCount - 1].message.date < 60
@@ -121,15 +121,17 @@ const readMessage = (message) => {
 
 // обработчик каждого апдейта
 const update = (update) => {
+
     const message = update.message;
-    const chatId = message?.chat?.id;
+    if (!message || message['message_id'] <= lastReaded) return;
+
+    const chatId = message.chat.id;
     console.log(chatId, chat);
     if (chatId !== chat) return
 
     const fromId = message?.from?.id;
     const fromName = message?.from['first_name'];
 
-    if (!message || message['message_id'] <= lastReaded) return;
 
     if (getUserIndex(fromId) === null) addUser(fromId, fromName);
     readMessage(message);
@@ -150,5 +152,5 @@ const handleInterval = async () => {
 
 fs.writeFileSync(file, `[{"trashTalkActive": "false"}]`, 'utf8');
 
-setInterval(handleInterval, 1000 * 60 * 5);
+setInterval(handleInterval, 1000);
 
