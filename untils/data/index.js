@@ -1,5 +1,5 @@
 import fs from "fs";
-import {file, defaultStage} from '../constants/index.js'
+import {file, defaultStage} from '../constants/index.js';
 
 export const init = () => {
     if (fs.existsSync(file)) fs.unlinkSync(file);
