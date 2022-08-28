@@ -28,7 +28,7 @@ const handleInterval = async () => {
     checkTrashTalk(updates);
     updates.map(update);
     sendStat();
-    if (new Date().getHours() > 22 && new Date().getMinutes() < timeToInterval / (1000 * 60)) handleDayEnd();
+     handleDayEnd();
 };
 
 init();
