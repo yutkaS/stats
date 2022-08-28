@@ -34,7 +34,7 @@ const handleInterval = async () => {
     sendStat();
 
     // переписать эту хуйню
-    if (new Date().getHours() > 22 && !settings.isStatSendToday) handleDayEnd();
+    if (new Date().getHours() > 19 && !settings.isStatSendToday) handleDayEnd();
 };
 
 init();
