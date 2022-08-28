@@ -2,7 +2,7 @@ import fs from "fs";
 import {file, defaultStage} from '../constants/index.js'
 
 export const init = () => {
-    fs.unlinkSync(file);
+    if (fs.existsSync(file)) fs.unlinkSync(file);
     fs.appendFileSync(file, defaultStage, 'utf8');
 }
 
