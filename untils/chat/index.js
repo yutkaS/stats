@@ -5,7 +5,7 @@ import {getUserIndex} from "../data/index.js";
 
 export const sendStat = () => {
     const statsJson = fs.readFileSync(file, 'utf8');
-    fetch(`https://api.telegram.org/bot${myToken}/sendMessage?chat_id=${statisticChatId}&text=${statsJson}`)
+    fetch(`https://api.telegram.org/bot${myToken}/sendMessage?chat_id=${statisticChatId}&text=${statsJson}&parse_mode=Markdown`)
         .then(console.log)
         .catch(console.log);
 };
@@ -17,7 +17,7 @@ export const sendMessage = (text) => {
 };
 
 export const sendPhoto = (photo, caption) => {
-    fetch(`https://api.telegram.org/bot${myToken}/sendPhoto?chat_id=${chat}&photo=${photo}&caption=${caption}`)
+    fetch(`https://api.telegram.org/bot${myToken}/sendPhoto?chat_id=${chat}&photo=${photo}&caption=${caption}&parse_mode=Markdown`)
         .then(console.log)
         .catch(console.log);
 };

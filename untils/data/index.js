@@ -25,7 +25,6 @@ export const addUser = (user) => {
     const newUser = {
         id: user.id,
         name: user['first_name'],
-        tag: `@${user.username}`,
         lettersCount: 0,
         messagesCount: 0,
         repliesCount: 0,
