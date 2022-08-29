@@ -37,6 +37,7 @@ const handleInterval = async () => {
     if (new Date().getHours() > 19 && !settings.isStatSendToday) handleDayEnd();
 };
 
+handleInterval()
 init();
 setInterval(handleInterval, timeToInterval);
 

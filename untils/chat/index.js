@@ -34,7 +34,7 @@ export const readMessage = (message) => {
     const caption = message.caption;
 
     const statsJson = fs.readFileSync(file, 'utf8');
-    const stats = JSON.parse(statsJson);
+    const {stats, settings} = JSON.parse(statsJson);
 
     const user = stats.stats[getUserIndex(readerId)];
     user.messagesCount += 1;
@@ -47,7 +47,7 @@ export const readMessage = (message) => {
     if (photo) user.photosCount += 1;
     if (replyBy) user.repliesCount += 1;
 
-    fs.writeFileSync(file, JSON.stringify(stats), 'utf8');
+    fs.writeFileSync(file, JSON.stringify({stats, settings}), 'utf8');
 };
 
 const stopTrashTalk = () => {
@@ -55,7 +55,7 @@ const stopTrashTalk = () => {
     const {settings, stats} = JSON.parse(statsJson);
     settings.trashTalkActive = false;
     // написать метод для работы с переменными в бд
-    fs.writeFileSync(file, JSON.stringify({stats, settings}), 'utf8');
+    fs.writeFileSync(file, JSON.stringify({settings, stats}), 'utf8');
 }
 
 const startTrashTalk = () => {
@@ -65,7 +65,7 @@ const startTrashTalk = () => {
     settings.hasTrashTalkToday = true;
     settings.trashTalkActive = true;
 
-    fs.writeFileSync(file, JSON.stringify({stats, settings}), 'utf8');
+    fs.writeFileSync(file, JSON.stringify({settings, stats}), 'utf8');
 }
 
 export const checkTrashTalk = (updates) => {
