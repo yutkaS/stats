@@ -2,8 +2,7 @@ import fs from "fs";
 import {file, defaultStage} from '../constants/index.js';
 
 export const init = () => {
-    if (!fs.existsSync(file)) fs.unlinkSync(file);
-    fs.appendFileSync(file, defaultStage, 'utf8');
+    if (!fs.existsSync(file)) fs.appendFileSync(file, defaultStage, 'utf8');
 }
 
 export const getUserIndex = (id) => {
