@@ -36,7 +36,7 @@ export const readMessage = (message) => {
     const statsJson = fs.readFileSync(file, 'utf8');
     const {stats, settings} = JSON.parse(statsJson);
 
-    const user = stats.stats[getUserIndex(readerId)];
+    const user = stats[getUserIndex(readerId)];
     user.messagesCount += 1;
     if (text) user.lettersCount += text.length;
     if (caption) user.lettersCount += caption.length;
