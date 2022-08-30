@@ -5,12 +5,13 @@ import {handleDayEnd} from "./untils/events/index.js";
 import fs from "fs";
 
 
-let lastReaded = 0;
 
 const update = (update) => {
+    const infoJson = fs.readFileSync(file, 'utf8')
+    const {settings, stats} = JSON.parse(infoJson);
 
     const message = update.message || update["edited_message"];
-    if (message['message_id'] <= lastReaded) return;
+    if (message['message_id'] <= settings.lastReaded) return;
 
     const chatId = message.chat.id;
     if (chatId !== chat) return
@@ -21,7 +22,8 @@ const update = (update) => {
     if (getUserIndex(user.id) === null) addUser(user);
     readMessage(message);
 
-    lastReaded = message['message_id'];
+    settings.lastReaded = message['message_id'];
+    fs.writeFileSync( file, JSON.stringify({settings, stats}), "utf8");
 };
 
 const handleInterval = async () => {
@@ -36,8 +38,7 @@ const handleInterval = async () => {
     // переписать эту хуйню
     if (new Date().getHours() > 19 && !settings.isStatSendToday) handleDayEnd();
 };
-
-handleInterval()
 init();
+handleInterval()
 setInterval(handleInterval, timeToInterval);
 

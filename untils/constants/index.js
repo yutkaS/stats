@@ -9,7 +9,7 @@ export const messageToTrashTalk = 40;
 export const isProd = false;
 export const timeToInterval = isProd ? 1000 * 60 * 5 : 5000;
 export const chat = isProd ? bottleChatId : chatIdTest;
-export const defaultStage = `{"settings":{"trashTalkActive": false, "isStatSendToday": false, "hasTrashTalkToday": false, "isProd": ${isProd}}, "stats":[]}`;
+export const defaultStage = `{"settings":{"trashTalkActive": false, "lastReaded": 0, "isStatSendToday": false, "hasTrashTalkToday": false, "isProd": ${isProd}}, "stats":[]}`;
 
 const fileName = isProd ? "stats.json" : "test.json";
 export const file = path.resolve(fileName);
