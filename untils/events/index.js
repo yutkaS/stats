@@ -21,4 +21,10 @@ export const handleDayEnd = () => {
 
     sendPhoto('AgACAgIAAxkBAAIH2GMKrP0pv4hxJU6ky5v9vaBcnJUmAAKSwDEbOHFYSBYkqkxtzEc1AQADAgADbQADKQQ', bestWorkerCongratulations)
     fs.writeFileSync(file, defaultStage);
+
+    // переписать эту хуйню
+    const defaultStatsJson = fs.readFileSync(file, 'utf8');
+    const {stats: defaultStats, options: defaultOptions} = JSON.parse(defaultStatsJson);
+    options.isStatSendToday = true;
+    fs.writeFileSync(file, JSON.stringify({options: defaultOptions, stats: defaultStats}));
 }
