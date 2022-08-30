@@ -69,6 +69,9 @@ const startTrashTalk = () => {
 }
 
 export const checkTrashTalk = (updates) => {
+    const statsJson = fs.readFileSync(file, 'utf8');
+    const {settings, stats} = JSON.parse(statsJson);
+
     const updatesCount = updates.length;
 
     if (updates < messageToTrashTalk) return;
@@ -81,7 +84,8 @@ export const checkTrashTalk = (updates) => {
 
     if (
         (lastMessage.date - oldMessage.date) * 1000 < timeToInterval &&
-        Date.now() / 1000 - lastMessage.date < 60 * 5
+        Date.now() / 1000 - lastMessage.date < 60 * 5 &&
+        !settings.trashTalkActive
     ) {
         sendPhoto("AgACAgIAAxkBAAIOPWMOM9M35sRxKmGVGgt7rMVS_uONAAJ6wjEbXeRxSHOYkcSMGvKUAQADAgADeAADKQQ", 'Товарищи! Вы начали дисскуссию, партия поощряет вас!')
         startTrashTalk();
