@@ -82,7 +82,10 @@ export const checkTrashTalk = (updates) => {
     if (
         (lastMessage.date - oldMessage.date) * 1000 < timeToInterval &&
         Date.now() / 1000 - lastMessage.date < 60 * 5
-    ) startTrashTalk();
+    ) {
+        sendPhoto("AgACAgIAAxkBAAIOPWMOM9M35sRxKmGVGgt7rMVS_uONAAJ6wjEbXeRxSHOYkcSMGvKUAQADAgADeAADKQQ", 'Товарищи! Вы начали дисскуссию, партия поощряет вас!')
+        startTrashTalk();
+    }
     else stopTrashTalk()
 };
 
