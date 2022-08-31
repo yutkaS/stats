@@ -23,8 +23,8 @@ export const handleDayEnd = () => {
     fs.writeFileSync(file, defaultStage);
 
     // переписать эту хуйню
-    settings.isStatSendToday = true;
     const defaultStatsJson = fs.readFileSync(file, 'utf8');
     const {stats: defaultStats, settings: defaultSettings} = JSON.parse(defaultStatsJson);
+    defaultSettings.isStatSendToday = true;
     fs.writeFileSync(file, JSON.stringify({settings: defaultSettings, stats: defaultStats}));
 }
