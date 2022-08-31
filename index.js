@@ -7,11 +7,9 @@ import fs from "fs";
 
 
 const update = (update) => {
-    const infoJson = fs.readFileSync(file, 'utf8')
-    const {settings, stats} = JSON.parse(infoJson);
 
     const message = update.message || update["edited_message"];
-    if (message['message_id'] <= settings.lastReaded) return;
+    // if (message['message_id'] <= settings.lastReaded) return;
 
     const chatId = message.chat.id;
     if (chatId !== chat) return
@@ -21,6 +19,9 @@ const update = (update) => {
 
     if (getUserIndex(user.id) === null) addUser(user);
     readMessage(message);
+
+    const infoJson = fs.readFileSync(file, 'utf8')
+    const {settings, stats} = JSON.parse(infoJson);
 
     settings.lastReaded = message['message_id'];
     fs.writeFileSync( file, JSON.stringify({settings, stats}), "utf8");

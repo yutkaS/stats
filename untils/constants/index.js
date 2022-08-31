@@ -6,7 +6,7 @@ export const bottleChatId = -1001537695968;
 export const statisticChatId = -643353109;
 export const messageToTrashTalk = 40;
 
-export const isProd = true;
+export const isProd = false;
 export const timeToInterval = isProd ? 1000 * 60 * 5 : 5000;
 export const chat = isProd ? bottleChatId : chatIdTest;
 export const defaultStage = `{"settings":{"trashTalkActive": false, "lastReaded": 0, "isStatSendToday": false, "hasTrashTalkToday": false, "isProd": ${isProd}}, "stats":[]}`;

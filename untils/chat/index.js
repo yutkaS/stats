@@ -46,7 +46,6 @@ export const readMessage = (message) => {
     if (voice) user.voicesCount += 1;
     if (photo) user.photosCount += 1;
     if (replyBy) user.repliesCount += 1;
-
     fs.writeFileSync(file, JSON.stringify({stats, settings}), 'utf8');
 };
 
