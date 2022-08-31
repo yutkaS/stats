@@ -25,8 +25,7 @@ const update = (update) => {
     // перепиать эту хуйню
     const updatedInfoJson = fs.readFileSync(file, 'utf8')
     const {settings: updatedSettings, stats} = JSON.parse(updatedInfoJson);
-
-    settings.lastReaded = message['message_id'];
+    updatedSettings.lastReaded = message['message_id'];
     fs.writeFileSync( file, JSON.stringify({settings: updatedSettings, stats}), "utf8");
 };
 
