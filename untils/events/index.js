@@ -26,5 +26,6 @@ export const handleDayEnd = () => {
     const defaultStatsJson = fs.readFileSync(file, 'utf8');
     const {stats: defaultStats, settings: defaultSettings} = JSON.parse(defaultStatsJson);
     defaultSettings.isStatSendToday = true;
+    defaultSettings.lastReaded = settings.lastReaded;
     fs.writeFileSync(file, JSON.stringify({settings: defaultSettings, stats: defaultStats}));
 }
