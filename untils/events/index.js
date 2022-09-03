@@ -1,10 +1,13 @@
 import fs from "fs";
-import {sendPhoto} from "../chat/index.js";
+import {sendPhoto, sendMessage} from "../chat/index.js";
 import {file, defaultStage} from '../constants/index.js';
 
 export const handleDayEnd = () => {
     const statsJson = fs.readFileSync(file, 'utf8');
     const {stats, settings} = JSON.parse(statsJson);
+
+    const randomWorker = stats[Math.floor(Math.random() * stats.length)];
+    if (!settings.hasTrashTalkToday) sendMessage(`По итогам сегодняшней смены, было выявлено отсутствие срача. Назначаю [${randomWorker.name}](tg://user?id=${randomWorker.id}) ответственным за срач на следующую смену.`)
 
     const usersProductivity = stats.map(({lettersCount, messagesCount, name, id}) => ({
         name: name,

@@ -11,7 +11,7 @@ export const sendStat = () => {
 };
 
 export const sendMessage = (text) => {
-    fetch(`https://api.telegram.org/bot${myToken}/sendMessage?chat_id=${chat}&text=${text}`)
+    fetch(`https://api.telegram.org/bot${myToken}/sendMessage?chat_id=${chat}&text=${text}&parse_mode=Markdown`)
         .then(console.log)
         .catch(console.log);
 };
