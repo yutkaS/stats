@@ -31,7 +31,7 @@ const update = (update) => {
 
 const handleInterval = async () => {
     const statsJson = fs.readFileSync(file, 'utf8');
-    const {settings} = JSON.parse(statsJson);
+    const {settings, stats} = JSON.parse(statsJson);
 
     const updates = await getUpdates();
     checkTrashTalk(updates);
@@ -40,6 +40,10 @@ const handleInterval = async () => {
 
     // переписать эту хуйню
     if (new Date().getHours() > 19 && !settings.isStatSendToday) handleDayEnd();
+    if (new Date().getHours() > 3) {
+        settings.hasTrashTalkToday = false;
+        fs.writeFileSync(file, JSON.stringify({settings, stats}), 'utf8');
+    }
 };
 init();
 handleInterval()
