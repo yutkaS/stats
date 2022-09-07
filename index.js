@@ -40,7 +40,8 @@ const handleInterval = async () => {
 
     // переписать эту хуйню
     if (new Date().getHours() > 19 && !settings.isStatSendToday) handleDayEnd();
-    if (new Date().getHours() < 3) {
+    else if (new Date().getHours() < 1) {
+        settings.isStatSendToday = false
         settings.hasTrashTalkToday = false;
         fs.writeFileSync(file, JSON.stringify({settings, stats}), 'utf8');
     }
