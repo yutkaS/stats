@@ -37,6 +37,7 @@ export const readMessage = (message) => {
     const {stats, settings} = JSON.parse(statsJson);
 
     const user = stats[getUserIndex(readerId)];
+
     user.messagesCount += 1;
     if (text) user.lettersCount += text.length;
     if (caption) user.lettersCount += caption.length;
