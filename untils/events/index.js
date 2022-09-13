@@ -13,10 +13,10 @@ export const handleDayEnd = () => {
         let points = 0;
 
         // переписать эту хуйню
-        if (stat.stickersCount) points += stat.stickersCount * 2 / stat.stickersCount;
-        if (stat.photosCount) points += stat.photosCount * 2 / stat.photosCount;
-        if (stat.messagesCount) points += stat.messagesCount * 0.25 / stat.messagesCount;
-        if (stat.voicesCount) points += stat.voicesCount * -10 / stat.voicesCount;
+        if (stat.stickersCount) points += stat.stickersCount * 2;
+        if (stat.photosCount) points += stat.photosCount * 2;
+        if (stat.messagesCount) points += stat.messagesCount * 0.25;
+        if (stat.voicesCount) points += stat.voicesCount * -10;
 
         return points;
     }
