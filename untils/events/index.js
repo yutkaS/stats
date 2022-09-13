@@ -29,7 +29,7 @@ export const handleDayEnd = () => {
     }))
 
     const bestWorker = usersPoints.sort(
-        ({points: points1}, {points: points2}) => points1 - points2
+        ({points: points1}, {points: points2}) => points2 - points1
     )[0];
 
     const bestWorkerCongratulations = `[${bestWorker.name}](tg://user?id=${bestWorker.id}), партия гордится тобой! У тебя лучший коэффициент продуктивности - ${bestWorker.points}!`
