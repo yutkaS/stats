@@ -28,13 +28,19 @@ export const handleDayEnd = () => {
         id: stat.id,
     }))
 
-    const bestWorker = usersPoints.sort(
+    const workerRating = usersPoints.sort(
         ({points: points1}, {points: points2}) => points2 - points1
-    )[0];
+    );
 
-    const bestWorkerCongratulations = `[${bestWorker.name}](tg://user?id=${bestWorker.id}), партия гордится тобой! У тебя лучший коэффициент продуктивности - ${bestWorker.points}!`
+    const bestWorker = workerRating[0];
+    const semiBestWorker = workerRating[1];
 
-    sendPhoto('AgACAgIAAxkBAAIH2GMKrP0pv4hxJU6ky5v9vaBcnJUmAAKSwDEbOHFYSBYkqkxtzEc1AQADAgADbQADKQQ', bestWorkerCongratulations)
+    const link = `[${bestWorker.name}](tg://user?id=${bestWorker.id})`;
+    const congratulations = workerRating[0].id === 149254493 ?
+        `партия игнорит тебя! Лучшим за смену становиться [${semiBestWorker.name}](tg://user?id=${semiBestWorker.id})` :
+        `партия гордится тобой! У тебя лучший коэффициент продуктивности - ${bestWorker.points}!`;
+
+    sendPhoto('AgACAgIAAxkBAAIH2GMKrP0pv4hxJU6ky5v9vaBcnJUmAAKSwDEbOHFYSBYkqkxtzEc1AQADAgADbQADKQQ', `${link}, ${congratulations}`)
     fs.writeFileSync(file, defaultStage);
 
     // переписать эту хуйню
