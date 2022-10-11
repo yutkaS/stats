@@ -87,7 +87,8 @@ export const checkTrashTalk = (updates) => {
         Date.now() / 1000 - lastMessage.date < 60 * 5 &&
         !settings.trashTalkActive
     ) {
-        sendPhoto("AgACAgIAAxkBAAIOPWMOM9M35sRxKmGVGgt7rMVS_uONAAJ6wjEbXeRxSHOYkcSMGvKUAQADAgADeAADKQQ", 'Товарищи! Вы начали дисскуссию, партия поощряет вас!')
+        // sendPhoto("AgACAgIAAxkBAAIOPWMOM9M35sRxKmGVGgt7rMVS_uONAAJ6wjEbXeRxSHOYkcSMGvKUAQADAgADeAADKQQ", 'Товарищи! Вы начали дисскуссию, партия поощряет вас!')
+        sendPhoto('AgACAgIAAxkBAAI_32NFb9HudBKOSZu6EfrakBUu3VTyAAJ_vjEb0rkoShYI7huPcMs_AQADAgADeAADKgQ', 'Товариші! Ви розпочали дискусію, партія заохочує вас!🇺🇦🇺🇦🇺🇦')
         startTrashTalk();
     }
     else stopTrashTalk()
