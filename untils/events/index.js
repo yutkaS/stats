@@ -36,9 +36,16 @@ export const handleDayEnd = () => {
     const semiBestWorker = workerRating[1];
 
     const link = `[${bestWorker.name}](tg://user?id=${bestWorker.id})`;
-    const congratulations = workerRating[0].id === 149254493 ?
-        `партия игнорит тебя! Лучшим за смену становиться [${semiBestWorker.name}](tg://user?id=${semiBestWorker.id})` :
-        `партия гордится тобой! У тебя лучший коэффициент продуктивности - ${bestWorker.points}!`;
+    let congratulations
+    switch(workerRating[0].id) {
+        case (149254493):
+        congratulations = `партия игнорит тебя! Лучшим за смену становиться [${semiBestWorker.name}](tg://user?id=${semiBestWorker.id})`;
+        break
+        case (323779471):
+            congratulations = `Производство гордится тобой! И выдает тебе не 3 или 7, а ${bestWorker.points} прокоинов!`;
+            break
+        default: congratulations =`партия гордится тобой! За отличную работу, партия выдает тебе ${bestWorker.points} прокоинов!`;
+    }
 
     sendPhoto('AgACAgIAAxkBAAIH2GMKrP0pv4hxJU6ky5v9vaBcnJUmAAKSwDEbOHFYSBYkqkxtzEc1AQADAgADbQADKQQ', `${link}, ${congratulations}`)
     fs.writeFileSync(file, defaultStage);
