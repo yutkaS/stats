@@ -1,0 +1,95 @@
+{
+  "settings": {
+    "trashTalkActive": false,
+    "lastReaded": 214891,
+    "isStatSendToday": true,
+    "hasTrashTalkToday": false,
+    "isProd": true
+  },
+  "stats": [
+    {
+      "id": 144661672,
+      "name": "Eugene",
+      "lettersCount": 788,
+      "messagesCount": 13,
+      "repliesCount": 0,
+      "forwardsCount": 1,
+      "photosCount": 1,
+      "stickersCount": 0,
+      "voicesCount": 0,
+      "videosCount": 0
+    },
+    {
+      "id": 149254493,
+      "name": "Vladislav",
+      "lettersCount": 429,
+      "messagesCount": 34,
+      "repliesCount": 8,
+      "forwardsCount": 0,
+      "photosCount": 12,
+      "stickersCount": 0,
+      "voicesCount": 0,
+      "videosCount": 0
+    },
+    {
+      "id": 745779358,
+      "name": "Иван",
+      "lettersCount": 683,
+      "messagesCount": 14,
+      "repliesCount": 4,
+      "forwardsCount": 3,
+      "photosCount": 1,
+      "stickersCount": 0,
+      "voicesCount": 0,
+      "videosCount": 2
+    },
+    {
+      "id": 323779471,
+      "name": "Роман",
+      "lettersCount": 25,
+      "messagesCount": 5,
+      "repliesCount": 2,
+      "forwardsCount": 0,
+      "photosCount": 2,
+      "stickersCount": 1,
+      "voicesCount": 0,
+      "videosCount": 0
+    },
+    {
+      "id": 939806729,
+      "name": "Salem",
+      "lettersCount": 56,
+      "messagesCount": 6,
+      "repliesCount": 2,
+      "forwardsCount": 0,
+      "photosCount": 0,
+      "stickersCount": 0,
+      "voicesCount": 0,
+      "videosCount": 0
+    },
+    {
+      "id": 362500050,
+      "name": "Andrey",
+      "lettersCount": 501,
+      "messagesCount": 26,
+      "repliesCount": 2,
+      "forwardsCount": 0,
+      "photosCount": 2,
+      "stickersCount": 1,
+      "voicesCount": 0,
+      "videosCount": 0
+    },
+    {
+      "id": 746009942,
+      "name": "Yutka",
+      "lettersCount": 28,
+      "messagesCount": 2,
+      "repliesCount": 0,
+      "forwardsCount": 0,
+      "photosCount": 0,
+      "stickersCount": 0,
+      "voicesCount": 0,
+      "videosCount": 0
+    }
+  ]
+}

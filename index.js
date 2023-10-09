@@ -3,6 +3,8 @@ import {timeToInterval, chat, file} from './untils/constants/index.js'
 import {getUserIndex, init, addUser} from "./untils/data/index.js";
 import {handleDayEnd} from "./untils/events/index.js";
 import fs from "fs";
+import {checkToSendStats} from "./untils/else/index.js";
+import {getData} from "./untils/else/index.js";
 
 
 
@@ -14,11 +16,13 @@ const update = (update) => {
     if (message['message_id'] <= settings.lastReaded) return;
 
     const chatId = message.chat.id;
+    if (message.from['is_bot']) console.log(message.from);
     if (chatId !== chat) return
+
+    // console.log(message.from);
     console.log(message, "прочитанное сообщение");
 
     const user = message.from;
-
     if (getUserIndex(user.id) === null) addUser(user);
     readMessage(message);
 
@@ -30,8 +34,7 @@ const update = (update) => {
 };
 
 const handleInterval = async () => {
-    const statsJson = fs.readFileSync(file, 'utf8');
-    const {settings, stats} = JSON.parse(statsJson);
+    const {settings, stats} = getData();
 
     const updates = await getUpdates();
     checkTrashTalk(updates);
@@ -39,14 +42,17 @@ const handleInterval = async () => {
     sendStat();
 
     // переписать эту хуйню
-    if (new Date().getHours() > 19 && !settings.isStatSendToday) handleDayEnd();
+
+
+    if (checkToSendStats()) handleDayEnd();
     else if (new Date().getHours() < 1) {
         settings.isStatSendToday = false
         settings.hasTrashTalkToday = false;
         fs.writeFileSync(file, JSON.stringify({settings, stats}), 'utf8');
     }
 };
+
 init();
-handleInterval()
+handleInterval();
 setInterval(handleInterval, timeToInterval);
 
